@@ -2,7 +2,7 @@
 This project is for the [GameDevTV](https://itch.io/jam/gamedevtv-jam-2023) 2023 Game Jam.
 
 Members:
-Johnathan - Programming and Management
-Frank - Music/SFX
-Alex - Programming, Level Design and GUI
-Isaac - Artwork
+<br/>Johnathan - Programming and Management
+<br/>Frank - Music/SFX
+<br/>Alex - Programming, Level Design and GUI
+<br/>Isaac - Artwork
