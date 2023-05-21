@@ -9,10 +9,14 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
+    [SerializeField] float speed=500;
+
     #region Dash Region
-    bool canDash;
+    bool canDash=true;
     [SerializeField] float dashPower=5;
     [SerializeField] float dashCooldown=1;
+    [SerializeField] float dashTime=0.5f;
+    float currentDashTime=0;
     float movementMultiplier = 1;
     #endregion
 
@@ -25,7 +29,8 @@ public class PlayerController : MonoBehaviour
 
         if (string.IsNullOrWhiteSpace(playerData))
         {
-            player = new Player("Bjornlief", 50, 5, 5, 50, 5, GameController.instance.guns[0].gun, GameController.instance.armors[0].armor, new Inventory());
+            //player = new Player("Bjornlief", 50, 5, 5, 50, 5, GameController.instance.guns[0].gun, GameController.instance.armors[0].armor, new Inventory());
+            player = new Player("Bjornlief", 50, 5, 5, 50, 5, null, null, new Inventory());
         }
         else
         {
@@ -39,9 +44,10 @@ public class PlayerController : MonoBehaviour
 
         if(movement != Vector2.zero)
         {
-            rb.AddForce(movement * movementMultiplier);
+            rb.velocity = movement * movementMultiplier * speed*Time.deltaTime;
 
-            if(movementMultiplier!=1) movementMultiplier = 1;
+            if (currentDashTime < 0) movementMultiplier = 1;
+            else currentDashTime -= Time.deltaTime;
         }
         else rb.velocity = Vector2.zero;
 
@@ -58,6 +64,7 @@ public class PlayerController : MonoBehaviour
             canDash=false;
 
             movementMultiplier = dashPower;
+            currentDashTime = dashTime;
 
             yield return new WaitForSeconds(dashCooldown);
 

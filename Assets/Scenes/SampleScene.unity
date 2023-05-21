@@ -176,7 +176,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 40
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -220,7 +220,6 @@ GameObject:
   - component: {fileID: 1034727622}
   - component: {fileID: 1034727623}
   - component: {fileID: 1034727624}
-  - component: {fileID: 1034727625}
   m_Layer: 0
   m_Name: DemoPlayer
   m_TagString: Untagged
@@ -349,34 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d77c88132919be4ebcc8fa3ad440d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashPower: 5
+  speed: 5000
+  dashPower: 10
   dashCooldown: 1
---- !u!61 &1034727625
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034727619}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.24407244, y: -0.089921415}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.2}
-    newSize: {x: 0.16, y: 0.2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.5698938, y: 1.263642}
-  m_EdgeRadius: 0
+  dashTime: 0.1
 --- !u!1 &1640669835
 GameObject:
   m_ObjectHideFlags: 0
