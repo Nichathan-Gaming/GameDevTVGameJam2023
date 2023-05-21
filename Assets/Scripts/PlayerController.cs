@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     const string PLAYER_PREFS = "PLAYER_PREFS";
 
     Rigidbody2D rb;
-    Animator anim;
 
     [SerializeField] float speed=500;
 
@@ -22,7 +21,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         string playerData = PlayerPrefs.GetString(PLAYER_PREFS, "");
@@ -50,9 +48,6 @@ public class PlayerController : MonoBehaviour
             else currentDashTime -= Time.deltaTime;
         }
         else rb.velocity = Vector2.zero;
-
-        anim.SetFloat("MoveY", rb.velocity.y);
-        anim.SetFloat("MoveX", rb.velocity.x);
 
         if (Input.GetAxisRaw("Fire2") != 0) if (canDash) StartCoroutine(Dash());
     }

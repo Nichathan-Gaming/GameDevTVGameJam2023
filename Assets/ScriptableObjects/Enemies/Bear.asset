@@ -18,4 +18,4 @@ MonoBehaviour:
     damage: 15
     attackSpeed: 10
     attackCooldown: 5
-    type: 2
+    type: 0
