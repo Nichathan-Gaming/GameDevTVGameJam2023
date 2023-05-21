@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.ComponentModel;
+using UnityEngine;
 /// <summary>
 /// 0 : Vatnvin - 5 (water wine) weak potion,
 /// 1 : Barnvin - 50 (child wine) medium potion,
@@ -24,6 +25,11 @@ public class Vin
     /// The type of Vin.
     /// </summary>
     public VinType type;
+
+    /// <summary>
+    /// The cost of this Vin
+    /// </summary>
+    public int cost;
     
     /// <summary>
     /// The count of this Vin remaining.
@@ -39,9 +45,14 @@ public class Vin
             return _count;
         }
         set {
-            _count = Mathf.Clamp(value, 0, 999);
+            _count = Mathf.Clamp(value, 0, maxVinCount);
         }
     }
+
+    /// <summary>
+    /// The player cannot have any more than 999 vin.
+    /// </summary>
+    public int maxVinCount { get { return 999; } }
 
     /// <summary>
     /// Default Vin constructor for JSON
@@ -52,9 +63,32 @@ public class Vin
     /// Constructs a Vin of a certain type with a count of 0;
     /// </summary>
     /// <param name="type">The type of this. 0-3</param>
-    public Vin(VinType type)
+    public Vin(VinType type, int cost)
     {
         this.type = type;
+        this.cost = cost;
+    }
+
+    /// <summary>
+    /// Determines if the count can be added to this.
+    /// </summary>
+    /// <param name="count">The number to try to add.</param>
+    /// <returns>True if the player can add count.</returns>
+    public bool CanAdd(int count)
+    {
+        return (_count + count) <= maxVinCount;
+    }
+
+    /// <summary>
+    /// Adds count to Vin
+    /// </summary>
+    /// <param name="count">the number of vin to add</param>
+    /// <exception cref="System.ArgumentOutOfRangeException">Thrown when receiving a value less than 1.</exception>
+    public void Add(int count)
+    {
+        if (count < 1) throw new System.ArgumentOutOfRangeException($"Vin.Add expected a value greater than 0 but received {count}.");
+        if (!CanAdd(count)) throw new System.ArgumentOutOfRangeException($"The count ({count}) is too high. Use CanAdd and ensure that this.count+count < maxVinCount.");
+        _count += count;
     }
 
     /// <summary>
