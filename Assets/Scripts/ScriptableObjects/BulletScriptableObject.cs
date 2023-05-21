@@ -19,6 +19,11 @@ public class BulletScriptableObject : ScriptableObject
     public float bulletDistance;
 
     /// <summary>
+    /// What is the angle that bullets can shoot at 0-180
+    /// </summary>
+    public float bulletSpread;
+
+    /// <summary>
     /// The sprite of this bullet.
     /// </summary>
     public Sprite bulletSprite;
