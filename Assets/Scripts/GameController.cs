@@ -4,8 +4,10 @@ public class GameController : MonoBehaviour
 {
     internal static GameController instance;
 
-    [SerializeField] internal Gun[] guns;
-    [SerializeField] internal Armor[] armors;
+    [SerializeField] internal GunScriptableObject[] guns;
+    [SerializeField] internal ArmorScriptableObject[] armors;
+
+    
 
     private void Awake()
     {

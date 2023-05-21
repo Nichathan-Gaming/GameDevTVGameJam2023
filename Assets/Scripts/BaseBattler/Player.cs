@@ -12,7 +12,7 @@ public class Player : Battler
 
     /// <summary>
     /// The max health of the player. Cannot be less than health. 
-    /// Absolute max is 99,999
+    /// Absolute max is 9,999
     /// </summary>
     public int maxHealth
     {
@@ -22,7 +22,7 @@ public class Player : Battler
         }
         set
         {
-            _maxHealth = Mathf.Clamp(value, health, 99999);
+            _maxHealth = Mathf.Clamp(value, health, 9999);
         }
     }
 

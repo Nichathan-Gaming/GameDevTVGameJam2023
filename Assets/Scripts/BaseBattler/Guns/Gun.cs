@@ -36,11 +36,6 @@ public class Gun
     public int capacity;
 
     /// <summary>
-    /// The guns current ammunition.
-    /// </summary>
-    public int currentAmmunition;
-
-    /// <summary>
     /// The speed at which ammunition is replenished. 
     /// </summary>
     public float reloadSpeed;
@@ -77,13 +72,12 @@ public class Gun
     /// <param name="type">The type of gun that is.</param>
     /// <param name="movementSpeed">The players augmented movement speed</param>
     /// <param name="turnSpeed">The players augmented turn speed</param>
-    public Gun(string name, float damage, float fireRate, int capacity, int currentAmmunition, float reloadSpeed, AmmunitionType type, float movementSpeed, float turnSpeed)
+    public Gun(string name, float damage, float fireRate, int capacity, float reloadSpeed, AmmunitionType type, float movementSpeed, float turnSpeed)
     {
         this.name = name;
         this.damage = damage;
         this.fireRate = fireRate;
         this.capacity = capacity;
-        this.currentAmmunition = currentAmmunition;
         this.reloadSpeed = reloadSpeed;
         this.type = type;
         this.movementSpeed = movementSpeed;
