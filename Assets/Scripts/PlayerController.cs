@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    internal static PlayerController instance;
+
     internal Player player;
     const string PLAYER_PREFS = "PLAYER_PREFS";
 
@@ -18,6 +20,11 @@ public class PlayerController : MonoBehaviour
     float currentDashTime=0;
     float movementMultiplier = 1;
     #endregion
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
