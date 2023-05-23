@@ -1,3 +1,4 @@
+using UnityEngine.Events;
 /// <summary>
 /// A typical Battler, holds the base values needed for the Player and base Enemy scripts.
 /// </summary>
@@ -10,9 +11,33 @@ public abstract class Battler
     public string name;
 
     /// <summary>
+    /// Runs when the health value is changed
+    /// </summary>
+    internal UnityEvent<int> onHealthChange;
+
+    /// <summary>
+    /// The base health of the battler.
+    /// </summary>
+    int _health;
+
+    /// <summary>
     /// The health of the battler. When this is 0 or below, the battler is dead.
     /// </summary>
-    public int health;
+    public int health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            if (_health != value)
+            {
+                _health = value;
+                if(onHealthChange!=null) onHealthChange.Invoke(value);
+            }
+        }
+    }
 
     /// <summary>
     /// The protected movement speed of this battler.
@@ -46,12 +71,13 @@ public abstract class Battler
     /// <param name="health">The battler initial health</param>
     /// <param name="movementSpeed">The battler movement speed</param>
     /// <param name="defense">The battler defense</param>
-    public Battler(string name, int health, float movementSpeed, int defense)
+    public Battler(string name, int health, float movementSpeed, int defense, UnityEvent<int> onHealthChange)
     {
         this.name = name;
         this.health = health;
         _movementSpeed = movementSpeed;
         _defense = defense;
+        this.onHealthChange = onHealthChange;
     }
 
     /// <summary>

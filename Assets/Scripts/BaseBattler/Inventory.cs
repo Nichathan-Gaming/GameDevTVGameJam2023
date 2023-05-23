@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// 0 : Ulfrhoufuo,
 /// 1 : Fenrirhoufuo,
@@ -23,6 +24,8 @@ public enum HeadType
 [System.Serializable]
 public class Inventory
 {
+    internal UnityEvent<int> onSilfrChange;
+
     int _silfr = 0;
 
     /// <summary>
@@ -36,7 +39,9 @@ public class Inventory
         }
         set
         {
-            _silfr = Mathf.Clamp(value, 0, 999999);
+            if(value < 0 || value > 999999) throw new System.ArgumentOutOfRangeException($"Expected a value greater than 0 and less than 1,000,000 but received {value}.");
+            _silfr = value;
+            if (onSilfrChange != null) onSilfrChange.Invoke(value);
         }
     }
 
@@ -77,6 +82,15 @@ public class Inventory
     /// A default Constructor for JSON.
     /// </summary>
     public Inventory() { }
+
+    /// <summary>
+    /// Constructs the Inventory with an onSilfrChange
+    /// </summary>
+    /// <param name="onSilfrChange"></param>
+    public Inventory(UnityEvent<int> onSilfrChange)
+    {
+        this.onSilfrChange = onSilfrChange;
+    }
 
     /// <summary>
     /// Determines if the Player can spend the allotted amount of money.

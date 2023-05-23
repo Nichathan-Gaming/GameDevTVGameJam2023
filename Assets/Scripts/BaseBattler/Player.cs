@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// A typical Player extends from Battler and has extra values for tracking the status of a player.
 /// </summary>
@@ -109,16 +110,17 @@ public class Player : Battler
     /// <param name="equippedGun">The gun that the player has equipped</param>
     /// <param name="equippedArmor">The armor that the player has equipped</param>
     /// <param name="inventory">The players current inventory</param>
+    /// <param name="onHealthChange">Ran when the player's health changes</param>
+    /// <param name="onSilfrChange">Ran when the player's silver changes</param>
     /// <exception cref="System.ArgumentOutOfRangeException">Thrown if the maxHealth is less than health.</exception>
-    public Player(string name, int health, float movementSpeed, int defense, int maxHealth, float turnSpeed, Gun equippedGun, Armor equippedArmor, Inventory inventory) 
-        : base(name, health, movementSpeed, defense)
+    public Player(string name, float movementSpeed, int defense, int maxHealth, float turnSpeed, Gun equippedGun, Armor equippedArmor, UnityEvent<int> onHealthChange, UnityEvent<int> onSilfrChange) 
+        : base(name, maxHealth, movementSpeed, defense, onHealthChange)
     {
-        if (maxHealth < health) throw new System.ArgumentOutOfRangeException($"maxHealth ({maxHealth}) cannot be less that health ({health}).");
         this.maxHealth = maxHealth;
         _turnSpeed = turnSpeed;
         this.equippedGun = equippedGun;
         this.equippedArmor = equippedArmor;
-        this.inventory = inventory;
+        inventory = new Inventory(onSilfrChange);
     }
 
     /// <summary>

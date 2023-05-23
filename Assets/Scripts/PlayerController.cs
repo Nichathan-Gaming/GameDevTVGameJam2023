@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,10 +11,23 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
 
+    [Header("The players movementSpeed")]
     [SerializeField] float speed=500;
+
+    [Header("On Value Change Events")]
+    /// <summary>
+    /// Called whenever the player's silfr changes
+    /// </summary>
+    [SerializeField] UnityEvent<int> onSilfrChange;
+
+    /// <summary>
+    /// Called whenever the player's health changes
+    /// </summary>
+    [SerializeField] UnityEvent<int> onHealthChange;
 
     #region Dash Region
     bool canDash=true;
+    [Header("Dash Variables")]
     [SerializeField] float dashPower=5;
     [SerializeField] float dashCooldown=1;
     [SerializeField] float dashTime=0.5f;
@@ -35,7 +49,7 @@ public class PlayerController : MonoBehaviour
         if (string.IsNullOrWhiteSpace(playerData))
         {
             //player = new Player("Bjornlief", 50, 5, 5, 50, 5, GameController.instance.guns[0].gun, GameController.instance.armors[0].armor, new Inventory());
-            player = new Player("Bjornlief", 50, 5, 5, 50, 5, null, null, new Inventory());
+            player = new Player("Bjornlief", 50, 5, 5, 50, null, null, onHealthChange, onSilfrChange);
         }
         else
         {
@@ -73,4 +87,6 @@ public class PlayerController : MonoBehaviour
             canDash = true;
         }
     }
+
+
 }
