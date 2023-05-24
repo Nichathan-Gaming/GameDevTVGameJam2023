@@ -15,6 +15,7 @@ MonoBehaviour:
   enemy:
     name: Bear
     health: 150
+    _movementSpeedMinMax: {x: 2, y: 5}
     damage: 15
     attackSpeed: 10
     attackCooldown: 5
