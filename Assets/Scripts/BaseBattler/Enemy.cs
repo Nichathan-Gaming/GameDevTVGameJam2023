@@ -13,6 +13,11 @@ public enum BattleType
 public class Enemy : Battler
 {
     /// <summary>
+    /// How heavy is this enemy? mass 70 is not push-able
+    /// </summary>
+    public float mass;
+
+    /// <summary>
     /// The movement speed of the enemy
     /// </summary>
     public override float movementSpeed { 
@@ -50,9 +55,9 @@ public class Enemy : Battler
     public float damage;
 
     /// <summary>
-    /// The speed an attack is performed at
+    /// If the enemy's battle type is HideAndAttack, they will hide for this many seconds
     /// </summary>
-    public float attackSpeed;
+    public float hideTimer;
 
     /// <summary>
     /// The time it takes between attacks. The monster will attack when this is 0 and move when it is greater than 0
@@ -68,6 +73,11 @@ public class Enemy : Battler
     /// The range at which the enemy can send an attack to the player.
     /// </summary>
     public float attackRange;
+
+    /// <summary>
+    /// The maximum number of bullets that this enemy can have active at once.
+    /// </summary>
+    public int maxBullets;
 
     /// <summary>
     /// The type of battle mechanics for this enemy.

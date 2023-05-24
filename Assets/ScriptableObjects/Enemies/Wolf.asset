@@ -15,8 +15,16 @@ MonoBehaviour:
   enemy:
     name: Wolf
     health: 50
+    mass: 70
     _movementSpeedMinMax: {x: 3, y: 6}
-    damage: 5
-    attackSpeed: 5
+    damage: 10
+    hideTimer: 0
     attackCooldown: 1
+    detectionRange: 0.6
+    attackRange: 0.3
+    maxBullets: 0
     type: 1
+  hideSprite: {fileID: 0}
+  defaultSprite: {fileID: 0}
+  bulletScriptableObject: {fileID: 0}
+  hasPenetration: 0

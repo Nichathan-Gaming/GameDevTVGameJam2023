@@ -84,6 +84,7 @@ public class Player : Battler
     { 
         get
         {
+            if (equippedArmor == null) return _defense;
             return _defense + equippedArmor.defense;
         }
         set
@@ -124,8 +125,8 @@ public class Player : Battler
     /// <summary>
     /// Reduces the players health by damage / (defense + armor)
     /// </summary>
-    /// <param name="damage">The damage to deal : must be &gt 0</param>
-    /// <returns>health > 0 after calculations</returns>
+    /// <param name="damage">The damage to deal : must be greater than 0</param>
+    /// <returns>health greater than 0 after calculations</returns>
     public override bool ReceiveDamage(float damage)
     {
         health -= (int) damage / defense;

@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    internal static PlayerController instance;
+
     internal Player player;
     const string PLAYER_PREFS = "PLAYER_PREFS";
 
@@ -19,6 +22,11 @@ public class PlayerController : MonoBehaviour
     float currentDashTime=0;
     float movementMultiplier = 1;
     #endregion
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -70,5 +78,15 @@ public class PlayerController : MonoBehaviour
 
             canDash = true;
         }
+    }
+
+    /// <summary>
+    /// deal damage to the player, if the player is dead after, set the player death in the game controller
+    /// </summary>
+    /// <param name="damage">must be greater than 0</param>
+    internal void TakeDamage(float damage)
+    {
+        print($"We are taking damage : {damage}.");
+        if (!player.ReceiveDamage(damage)) GameController.instance.SetPlayerDeath();
     }
 }

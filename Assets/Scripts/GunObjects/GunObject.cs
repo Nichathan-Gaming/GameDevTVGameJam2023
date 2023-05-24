@@ -14,4 +14,8 @@ public class GunObject : MonoBehaviour
     /// The SpriteRenderer that holds the gun sprite
     /// </summary>
     [SerializeField] SpriteRenderer gunSpriteRenderer;
+
+    [SerializeField] BulletObject[] bulletObjects;
+
+
 }
