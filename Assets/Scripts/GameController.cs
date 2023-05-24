@@ -7,11 +7,14 @@ public class GameController : MonoBehaviour
     [SerializeField] internal GunScriptableObject[] guns;
     [SerializeField] internal ArmorScriptableObject[] armors;
 
-    
-
     private void Awake()
     {
         //convert to DontDestroyOnLoad if we make this multi-scene
         instance = this;
+    }
+
+    internal void SetPlayerDeath()
+    {
+        throw new System.NotImplementedException("GameController.SetPlayerDeath() has not been implemented.");
     }
 }

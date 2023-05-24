@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -88,5 +89,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// deal damage to the player, if the player is dead after, set the player death in the game controller
+    /// </summary>
+    /// <param name="damage">must be greater than 0</param>
+    internal void TakeDamage(float damage)
+    {
+        print($"We are taking damage : {damage}.");
+        if (!player.ReceiveDamage(damage)) GameController.instance.SetPlayerDeath();
+    }
 }
