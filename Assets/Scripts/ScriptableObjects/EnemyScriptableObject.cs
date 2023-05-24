@@ -4,4 +4,6 @@
 public class EnemyScriptableObject : ScriptableObject
 {
     public Enemy enemy;
+
+    public AudioClip enemyCry;
 }
