@@ -26,7 +26,7 @@ public class Inventory
 {
     internal UnityEvent<int> onSilfrChange;
 
-    int _silfr = 0;
+    int _silfr = 10000;
 
     /// <summary>
     /// The players silver. Cannot go below 0 or above 999,999.
