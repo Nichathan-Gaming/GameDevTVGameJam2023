@@ -17,3 +17,5 @@ Controls:
 <br/>Move - WASD
 <br/>Dash - RMB
 <br/>Shoot - LMB
+
+<br/>[Play](https://nichathan.itch.io/bjornliefs-lament)
