@@ -27,87 +27,90 @@ public class GunRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(mPos.y, mPos.x) * Mathf.Rad2Deg;
-
-        //transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
-        Vector3 moveTo = Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles;
-
-        //if one is 180-360 and the other is 180-0, it will scroll backwards, use this to avoid that.
-        if (Vector3.Distance(transform.eulerAngles, moveTo) > 180) moveTo += new Vector3(0, 0, 360 * ((transform.eulerAngles.z > moveTo.z) ? 1 : -1));
-
-        transform.eulerAngles = Vector3.MoveTowards(transform.eulerAngles, moveTo, speed * Time.deltaTime);
-
-        if(transform.eulerAngles.z < 90 || transform.eulerAngles.z > 270)
+        if (GameController.instance.isGameActive)
         {
-            gunTransform.localScale = new Vector3(0.5f, 0.5f, 1);
-        }
-        else
-        {
-            gunTransform.localScale = new Vector3(0.5f, -0.5f, 1);
-        }
+            Vector3 mPos = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(mPos.y, mPos.x) * Mathf.Rad2Deg;
 
-        gunZ = 0;
-        if (transform.eulerAngles.z >= 45 && transform.eulerAngles.z < 135)
-        {
-            gunZ = 1;
-            anim.SetFloat("MoveY", 1);
-            anim.SetFloat("MoveX", 0);
+            //transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+            Vector3 moveTo = Quaternion.AngleAxis(angle, Vector3.forward).eulerAngles;
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            //if one is 180-360 and the other is 180-0, it will scroll backwards, use this to avoid that.
+            if (Vector3.Distance(transform.eulerAngles, moveTo) > 180) moveTo += new Vector3(0, 0, 360 * ((transform.eulerAngles.z > moveTo.z) ? 1 : -1));
+
+            transform.eulerAngles = Vector3.MoveTowards(transform.eulerAngles, moveTo, speed * Time.deltaTime);
+
+            if (transform.eulerAngles.z < 90 || transform.eulerAngles.z > 270)
             {
-                isMoving = true;
+                gunTransform.localScale = new Vector3(0.5f, 0.5f, 1);
             }
             else
             {
-                isMoving = false;
+                gunTransform.localScale = new Vector3(0.5f, -0.5f, 1);
             }
-            
-        }
-        else if (transform.eulerAngles.z >= 135 && transform.eulerAngles.z < 225)
-        {
-            anim.SetFloat("MoveY", 0);
-            anim.SetFloat("MoveX", -1);
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            gunZ = 0;
+            if (transform.eulerAngles.z >= 45 && transform.eulerAngles.z < 135)
             {
-                isMoving = true;
+                gunZ = 1;
+                anim.SetFloat("MoveY", 1);
+                anim.SetFloat("MoveX", 0);
+
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                }
+                else
+                {
+                    isMoving = false;
+                }
+
+            }
+            else if (transform.eulerAngles.z >= 135 && transform.eulerAngles.z < 225)
+            {
+                anim.SetFloat("MoveY", 0);
+                anim.SetFloat("MoveX", -1);
+
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                }
+                else
+                {
+                    isMoving = false;
+                }
+            }
+            else if (transform.eulerAngles.z >= 225 && transform.eulerAngles.z < 315)
+            {
+                anim.SetFloat("MoveY", -1);
+                anim.SetFloat("MoveX", 0);
+
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                }
+                else
+                {
+                    isMoving = false;
+                }
             }
             else
             {
-                isMoving = false;
-            }
-        }
-        else if (transform.eulerAngles.z >= 225 && transform.eulerAngles.z < 315)
-        {
-            anim.SetFloat("MoveY", -1);
-            anim.SetFloat("MoveX", 0);
+                anim.SetFloat("MoveY", 0);
+                anim.SetFloat("MoveX", 1);
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            {
-                isMoving = true;
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = true;
+                }
+                else
+                {
+                    isMoving = false;
+                }
             }
-            else
-            {
-                isMoving = false;
-            }
-        }
-        else
-        {
-            anim.SetFloat("MoveY", 0);
-            anim.SetFloat("MoveX", 1);
+            transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + yOffset, gunZ);
 
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            {
-                isMoving = true;
-            }
-            else
-            {
-                isMoving = false;
-            }
+            anim.SetBool("isMoving", isMoving);
         }
-        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y+yOffset, gunZ);
-
-        anim.SetBool("isMoving", isMoving);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MonsterItem : MonoBehaviour
@@ -28,6 +29,8 @@ public class MonsterItem : MonoBehaviour
     [SerializeField] Canvas canvas;
 
     bool hasStarted = false;
+
+    [SerializeField] TMP_Text healthText;
 
     private void Update()
     {
@@ -78,11 +81,14 @@ public class MonsterItem : MonoBehaviour
 
         transform.localScale *= 1 + (level/10f);
         hasStarted = true;
+
+        healthText.text = ""+ (int)health;
     }
 
     internal void TakeDamage(float damage)
     {
         health -= damage;
+        healthText.text = "" + (int) health;
 
         if (health <= 0)
         {
