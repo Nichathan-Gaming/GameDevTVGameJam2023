@@ -12,6 +12,7 @@ public class GunRotate : MonoBehaviour
     int gunZ = 0;
 
     [SerializeField] Animator anim;
+    [SerializeField] bool isMoving;
 
     [SerializeField] Transform playerTransform;
 
@@ -50,22 +51,61 @@ public class GunRotate : MonoBehaviour
             gunZ = 1;
             anim.SetFloat("MoveY", 1);
             anim.SetFloat("MoveX", 0);
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
+            
         }
         else if (transform.eulerAngles.z >= 135 && transform.eulerAngles.z < 225)
         {
             anim.SetFloat("MoveY", 0);
             anim.SetFloat("MoveX", -1);
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
         else if (transform.eulerAngles.z >= 225 && transform.eulerAngles.z < 315)
         {
             anim.SetFloat("MoveY", -1);
             anim.SetFloat("MoveX", 0);
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
         else
         {
             anim.SetFloat("MoveY", 0);
             anim.SetFloat("MoveX", 1);
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
+            }
         }
         transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y-1, gunZ);
+
+        anim.SetBool("isMoving", isMoving);
     }
 }
