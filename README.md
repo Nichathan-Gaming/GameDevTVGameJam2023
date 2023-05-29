@@ -14,6 +14,6 @@ This game is about a descendant of vikings Bjorn and Bera - Bjornlief. After ano
 Move. Dash. Shoot.
 
 Controls:
-Move - WASD
-Dash - RMB
-Shoot - LMB
+<br/>Move - WASD
+<br/>Dash - RMB
+<br/>Shoot - LMB
