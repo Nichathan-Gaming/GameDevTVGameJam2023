@@ -16,6 +16,8 @@ public class GunRotate : MonoBehaviour
 
     [SerializeField] Transform playerTransform;
 
+    [SerializeField] float yOffset = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,7 +106,7 @@ public class GunRotate : MonoBehaviour
                 isMoving = false;
             }
         }
-        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y-1, gunZ);
+        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y+yOffset, gunZ);
 
         anim.SetBool("isMoving", isMoving);
     }
