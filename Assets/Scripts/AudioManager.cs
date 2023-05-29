@@ -30,7 +30,6 @@ public class AudioManager : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] AudioSource musicAudioSource;
-    [SerializeField] AudioClip[] musicClips;
 
     [Header("SFX")]
     [SerializeField] AudioSource[] sfxAudioSources;
@@ -95,21 +94,6 @@ public class AudioManager : MonoBehaviour
     {
         instance.sfxAudioSources[(int)soundEffects].volume = instance._sfxVolume;
         instance.sfxAudioSources[(int)soundEffects].Play();
-    }
-
-    /// <summary>
-    /// Sets the musicAudioSource.clip to the clip in the spot of the map region
-    /// </summary>
-    /// <param name="mapRegion">
-    /// Skakoan,
-    /// Grund,
-    /// Hel,
-    /// Sandr,
-    /// MainMenu
-    /// </param>
-    internal static void ChangeRegion(MapRegion mapRegion)
-    {
-        instance.musicAudioSource.clip = instance.musicClips[(int) mapRegion];
     }
 
     /// <summary>
