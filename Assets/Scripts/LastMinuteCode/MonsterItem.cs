@@ -25,44 +25,48 @@ public class MonsterItem : MonoBehaviour
     bool attackingPlayer=false;
     PlayerController playerController;
 
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+    [SerializeField] Canvas canvas;
 
     private void Update()
     {
-        if (isDash)
+        if (GameController.instance.isGameActive)
         {
-            transform.position = Vector3.MoveTowards(transform.position, lastPosition, speed);
-            currentDashTime -= Time.deltaTime;
-
-            if(currentDashTime < 0)
+            if (isDash)
             {
-                currentDashTime = dashTime;
-                lastPosition = player.position;
-            }
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed);
-        }
+                transform.position = Vector3.MoveTowards(transform.position, lastPosition, speed);
+                currentDashTime -= Time.deltaTime;
 
-        if (attackingPlayer)
-        {
-            if (currentAttackTimer < attackSpeed) currentAttackTimer += Time.deltaTime;
+                if (currentDashTime < 0)
+                {
+                    currentDashTime = dashTime;
+                    lastPosition = player.position;
+                }
+            }
             else
             {
-                currentAttackTimer = 0;
+                transform.position = Vector3.MoveTowards(transform.position, player.position, speed);
+            }
 
+            if (attackingPlayer)
+            {
+                if (currentAttackTimer < attackSpeed) currentAttackTimer += Time.deltaTime;
+                else
+                {
+                    currentAttackTimer = 0;
+                    playerController.TakeDamage(damage);
+                }
             }
         }
     }
 
-    internal void SetMonster(float level, bool isDash, Vector3 startPosition)
+    internal void SetMonster(float level, bool isDash, Transform player, Vector3 startPosition)
     {
+        this.player = player;
+        playerController = player.GetComponent<PlayerController>();
+        canvas.worldCamera = Camera.main;
         lastPosition = player.position;
-        transform.position = startPosition;
+        transform.localPosition = startPosition;
+        print($"StartPosition : {startPosition}");
         gameObject.SetActive(true);
         this.isDash = isDash;
         dashTime = Random.Range(dashMinMax.x, dashMinMax.y);
@@ -83,10 +87,11 @@ public class MonsterItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Player"))
-        {
-            playerController = collision.GetComponent<PlayerController>();
-            attackingPlayer = true;
-        }
+        if (collision.tag.Equals("Player")) attackingPlayer = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Player")) attackingPlayer = false;
     }
 }

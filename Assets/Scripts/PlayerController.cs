@@ -60,18 +60,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        if(movement != Vector2.zero)
+        if (GameController.instance.isGameActive)
         {
-            rb.velocity = movement * movementMultiplier * speed*Time.deltaTime;
+            Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            if (currentDashTime < 0) movementMultiplier = 1;
-            else currentDashTime -= Time.deltaTime;
+            if(movement != Vector2.zero)
+            {
+                rb.velocity = movement * movementMultiplier * speed*Time.deltaTime;
+
+                if (currentDashTime < 0) movementMultiplier = 1;
+                else currentDashTime -= Time.deltaTime;
+            }
+            else rb.velocity = Vector2.zero;
+
+            if (Input.GetAxisRaw("Fire2") != 0) if (canDash) StartCoroutine(Dash());
         }
-        else rb.velocity = Vector2.zero;
-
-        if (Input.GetAxisRaw("Fire2") != 0) if (canDash) StartCoroutine(Dash());
     }
 
     IEnumerator Dash()

@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     internal static GameController instance;
 
-    [SerializeField] internal GunScriptableObject[] guns;
-    [SerializeField] internal ArmorScriptableObject[] armors;
+    internal bool isGameActive = true;
+    internal float gameTimer = 0;
 
     private void Awake()
     {
@@ -13,8 +14,19 @@ public class GameController : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        if (isGameActive) gameTimer += Time.deltaTime;
+    }
+
+    public void StartGame()
+    {
+        isGameActive = true;
+    }
+
     internal void SetPlayerDeath()
     {
-        throw new System.NotImplementedException("GameController.SetPlayerDeath() has not been implemented.");
+        isGameActive = false;
+        SceneManager.LoadScene("GameScene");
     }
 }
