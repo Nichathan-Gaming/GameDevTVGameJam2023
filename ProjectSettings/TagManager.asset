@@ -11,6 +11,7 @@ TagManager:
   - Enemy4
   - Enemy5
   - EnemyLimiter
+  - Enemy
   layers:
   - Default
   - TransparentFX

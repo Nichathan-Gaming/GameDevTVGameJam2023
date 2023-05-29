@@ -65,6 +65,6 @@ public class MonsterSpawner : MonoBehaviour
         return new Vector3(
             Random.Range(monsterSpawnMinMax.x, monsterSpawnMinMax.y) * (Random.Range(0,2)==1?1:-1),
             Random.Range(monsterSpawnMinMax.x, monsterSpawnMinMax.y) * (Random.Range(0, 2) == 1 ? 1 : -1)
-        ) + player.position;
+        );
     }
 }

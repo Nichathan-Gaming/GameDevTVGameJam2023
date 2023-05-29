@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,6 +36,17 @@ public class PlayerController : MonoBehaviour
     float currentDashTime=0;
     float movementMultiplier = 1;
     #endregion
+
+    [SerializeField] float maxBullets = 60;
+
+    [SerializeField] float shotTimer=0.1f;
+    float currentShotTimer=0;
+
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform bulletInstantiationLocation;
+    List<Bullet> bullets = new List<Bullet>();
+
+    [SerializeField] Transform gunTransform;
 
     private void Awake()
     {
@@ -74,6 +86,42 @@ public class PlayerController : MonoBehaviour
             else rb.velocity = Vector2.zero;
 
             if (Input.GetAxisRaw("Fire2") != 0) if (canDash) StartCoroutine(Dash());
+
+            if(Input.GetAxisRaw("Fire1") != 0)
+            {
+                if(currentShotTimer > 0)
+                {
+                    currentShotTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    currentShotTimer = shotTimer;
+                    Shoot();
+                }
+            }
+        }
+    }
+
+    void Shoot()
+    {
+        foreach(var bullet in bullets)
+        {
+            if (!bullet.gameObject.activeInHierarchy)
+            {
+                bullet.transform.position = gunTransform.position;
+                bullet.SetBullet(transform.position);
+                return;
+            }
+        }
+
+        if(bullets.Count < maxBullets)
+        {
+            Bullet bullet = Instantiate(bulletPrefab, bulletInstantiationLocation).GetComponent<Bullet>();
+
+            bullet.transform.position = gunTransform.position;
+            bullet.SetBullet(transform.position);
+
+            bullets.Add(bullet);
         }
     }
 

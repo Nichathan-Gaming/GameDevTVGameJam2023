@@ -11,7 +11,7 @@ public class MonsterItem : MonoBehaviour
     [SerializeField] Vector2 baseDamage;
     float damage;
     [SerializeField] Vector2 baseSpeed;
-    float speed;
+    [SerializeField] float speed;
 
     Transform player;
     bool isDash;
@@ -27,13 +27,15 @@ public class MonsterItem : MonoBehaviour
 
     [SerializeField] Canvas canvas;
 
+    bool hasStarted = false;
+
     private void Update()
     {
-        if (GameController.instance.isGameActive)
+        if (GameController.instance.isGameActive && hasStarted)
         {
             if (isDash)
             {
-                transform.position = Vector3.MoveTowards(transform.position, lastPosition, speed);
+                transform.position = Vector3.MoveTowards(transform.position, lastPosition, speed * Time.deltaTime);
                 currentDashTime -= Time.deltaTime;
 
                 if (currentDashTime < 0)
@@ -44,7 +46,7 @@ public class MonsterItem : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, player.position, speed);
+                transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
             }
 
             if (attackingPlayer)
@@ -66,23 +68,27 @@ public class MonsterItem : MonoBehaviour
         canvas.worldCamera = Camera.main;
         lastPosition = player.position;
         transform.position = startPosition;
-        print($"StartPosition : {startPosition}\ntransform.position : {transform.position}");
         gameObject.SetActive(true);
         this.isDash = isDash;
         dashTime = Random.Range(dashMinMax.x, dashMinMax.y);
         currentDashTime = dashTime;
-        health = Random.Range(baseHealth.x, baseHealth.y) * ((level-1) * levelMultiplier);
-        damage = Random.Range(baseDamage.x, baseDamage.y) * ((level - 1) * levelMultiplier);
-        speed = Random.Range(baseSpeed.x, baseSpeed.y) * ((level - 1) * levelMultiplier) * (isDash ? 1.5f : 1);
+        health = Random.Range(baseHealth.x, baseHealth.y) * (level * levelMultiplier);
+        damage = Random.Range(baseDamage.x, baseDamage.y) * (level * levelMultiplier);
+        speed = Random.Range(baseSpeed.x, baseSpeed.y) * (level * levelMultiplier) * (isDash ? 1.5f : 1);
 
         transform.localScale *= 1 + (level/10f);
+        hasStarted = true;
     }
 
     internal void TakeDamage(float damage)
     {
         health -= damage;
 
-        if (health <= 0) gameObject.SetActive(false);
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+            hasStarted = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
