@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">must be greater than 0</param>
     internal void TakeDamage(float damage)
     {
-        print($"We are taking damage : {damage}.");
         if (!player.ReceiveDamage(damage)) GameController.instance.SetPlayerDeath();
     }
 }
