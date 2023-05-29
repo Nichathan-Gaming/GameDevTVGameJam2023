@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 6186889952360782484}
   m_Layer: 5
   m_Name: MonsterCanvas
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,9 +249,9 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6186889952360782482
@@ -331,6 +331,7 @@ MonoBehaviour:
   baseHealth: {x: 3, y: 6}
   baseDamage: {x: 1, y: 5}
   baseSpeed: {x: 3, y: 5}
+  speed: 0
   dashMinMax: {x: 3, y: 6}
   canvas: {fileID: 6186889952360782482}
 --- !u!58 &6186889952360782484
