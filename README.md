@@ -2,10 +2,10 @@
 This project is for the [GameDevTV](https://itch.io/jam/gamedevtv-jam-2023) 2023 Game Jam.
 
 Members:
-<br/>Johnathan - Programming and Management
-<br/>Frank - Music/SFX
-<br/>Alex - Programming, Level Design and GUI
-<br/>Isaac - Artwork
+<br/>Nichathan Gaming - Programming, Management, and Artwork
+<br/>OzoneY - Programming and GUI
+<br/>fwabber - Music/SFX
+<br/>BlazingCrown - Artwork
 
 Name of the game: Bjornlief's Lament
 
