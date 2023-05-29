@@ -104,7 +104,9 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        foreach(var bullet in bullets)
+        AudioManager.PlaySFX(SoundEffects.Shot);
+
+        foreach (var bullet in bullets)
         {
             if (!bullet.gameObject.activeInHierarchy)
             {

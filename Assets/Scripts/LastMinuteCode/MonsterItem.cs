@@ -88,6 +88,7 @@ public class MonsterItem : MonoBehaviour
         {
             gameObject.SetActive(false);
             hasStarted = false;
+            GameController.instance.UpdateKills();
         }
     }
 

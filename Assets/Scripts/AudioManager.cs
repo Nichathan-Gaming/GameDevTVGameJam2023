@@ -21,7 +21,11 @@ public enum MapRegion
 
 public enum SoundEffects
 {
-
+    Die0,
+    Die1,
+    Die2,
+    Shot,
+    Click
 }
 
 public class AudioManager : MonoBehaviour
