@@ -46,6 +46,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Sprite sfxOn;
     [SerializeField] Sprite sfxOff;
 
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
+
     const string MUSIC_PREFS = "AudioManager_MUSIC_PREFS";
     const string SFX_PREFS = "AudioManager_SFX_PREFS";
 
@@ -79,6 +82,13 @@ public class AudioManager : MonoBehaviour
     {
         musicImage.sprite = musicVolume>0?musicOn:musicOff;
         musicAudioSource.volume = musicVolume;
+        musicSlider.value = musicVolume;
+
+        if (musicVolume > 0)
+        {
+            musicAudioSource.Play();
+        }
+        else musicAudioSource.Stop();
     }
 
     /// <summary>
@@ -87,6 +97,7 @@ public class AudioManager : MonoBehaviour
     void SetSFX()
     {
         sfxImage.sprite = _sfxVolume > 0 ? sfxOn : sfxOff;
+        sfxSlider.value = sfxVolume;
     }
 
     /// <summary>

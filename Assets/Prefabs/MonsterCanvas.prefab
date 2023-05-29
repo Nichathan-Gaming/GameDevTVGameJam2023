@@ -297,7 +297,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6186889952360782480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   speed: 0
   dashMinMax: {x: 3, y: 6}
   canvas: {fileID: 6186889952360782482}
+  healthText: {fileID: 6186889951044854338}
 --- !u!58 &6186889952360782484
 CircleCollider2D:
   m_ObjectHideFlags: 0
