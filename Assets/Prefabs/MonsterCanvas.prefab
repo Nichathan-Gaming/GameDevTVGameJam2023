@@ -297,7 +297,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6186889952360782480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
   levelMultiplier: 1.1
   baseHealth: {x: 3, y: 6}
   baseDamage: {x: 1, y: 5}
-  baseSpeed: {x: 10, y: 15}
+  baseSpeed: {x: 3, y: 5}
   dashMinMax: {x: 3, y: 6}
   canvas: {fileID: 6186889952360782482}
 --- !u!58 &6186889952360782484

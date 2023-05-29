@@ -65,8 +65,8 @@ public class MonsterItem : MonoBehaviour
         playerController = player.GetComponent<PlayerController>();
         canvas.worldCamera = Camera.main;
         lastPosition = player.position;
-        transform.localPosition = startPosition;
-        print($"StartPosition : {startPosition}");
+        transform.position = startPosition;
+        print($"StartPosition : {startPosition}\ntransform.position : {transform.position}");
         gameObject.SetActive(true);
         this.isDash = isDash;
         dashTime = Random.Range(dashMinMax.x, dashMinMax.y);
