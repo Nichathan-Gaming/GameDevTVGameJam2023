@@ -18,4 +18,5 @@ Controls:
 <br/>Dash - RMB
 <br/>Shoot - LMB
 
-<br/>[Play](https://nichathan.itch.io/bjornliefs-lament)
+<br/>[Play](https://nichathan-gaming.github.io/GameDevTVGameJam2023/)
+<br/>[Download Exe](https://nichathan.itch.io/bjornliefs-lament)
